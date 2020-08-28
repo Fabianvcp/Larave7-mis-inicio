@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Project;
 use Illuminate\Http\Request;
 
-class PortfolioController extends Controller
+class ProjectController extends Controller
 {
     /**
      *Vista principal y/o donde se muestran el listado de elementos.
@@ -13,13 +15,14 @@ class PortfolioController extends Controller
      */
     public function index()
     {
-        $portfolio = [
-            ['title' => 'Proyecto #1' ],
-            ['title' => 'Proyecto #2' ],
-            ['title' => 'Proyecto #3' ],
-            ['title' => 'Proyecto #4' ],
-        ];
-        return view('portfolio', compact('portfolio'));
+        //$projects = DB::table('projects')->get(); orm comun
+        // $projects = Project::latest('updated_at)->get(); ultima actualización
+        //$projects = Project::get();
+        //$projects = Project::latest()->paginate();  paginación
+
+        return view('projects.index',[
+            'projects' => Project::latest()->paginate()
+        ]);
     }
 
     /**
@@ -49,9 +52,14 @@ class PortfolioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Project $project)
     {
-        //
+        //  busca los datos con el mismo id
+        // $project = Project::find($id);
+
+        return view('projects.show',[
+            'project' => $project
+        ]);
     }
 
     /**

@@ -32,10 +32,11 @@ Route::get('/', function () {
 */
 
 Route::view('/','home')->name('home');
-Route::view('/about', 'about')->name('about');
+Route::view('/quienes-somos', 'about')->name('about');
 //Route::view('/portfolio', 'portfolio',compact('portfolio'))->name('portfolio');
-Route::get('/portfolio', 'PortfolioController@index')->name('portfolio');
+Route::get('/portafolio', 'ProjectController@index')->name('projects.index');
+Route::get('/portafolio/{project}', 'ProjectController@show')->name('projects.show');
 //Route::view('/contact', 'contact')->name('contact');
 
-Route::get('/contact', 'MessagesController@index' )->name('contact');
-Route::post('/contact', 'MessagesController@store' );
+Route::get('/contacto', 'MessagesController@index' )->name('contact');
+Route::post('/contacto', 'MessagesController@store' )->name('messages.store');
