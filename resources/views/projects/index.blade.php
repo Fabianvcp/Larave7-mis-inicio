@@ -5,6 +5,8 @@
 
     <h1>Projectos</h1>
     Bienvenido {{ $nombre ?? "Invitado" }}
+    <br>
+    <a href="{{ route('projects.create') }}">Crear proyecto</a>
 
     <ul>
 
@@ -14,7 +16,7 @@
 
         @forelse($projects as $project)
 
-            <li>    <a href="{{ route('projects.show', $project) }}"><strong>{{ $project->title}}</strong></a> <br>
+            <li><a href="{{ route('projects.show', $project) }}"><strong>{{ $project->title}}</strong></a> <br>
                 {{--                    <small>{{ $project->description }}</small> <br>    --}}
                 {{--                    {{ $project->created_at->format('d-m-Y') }} <br>   --}}
             </li>

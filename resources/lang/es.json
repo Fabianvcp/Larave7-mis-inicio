@@ -55,5 +55,6 @@
   "show":"mostrar",
   "update":"actualizar",
   "store" :"almacenar",
-  "destroy":"Eliminar"
+  "destroy":"Eliminar",
+  "send": "enviar"
 }

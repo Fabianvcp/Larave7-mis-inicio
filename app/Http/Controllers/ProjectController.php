@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Project;
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateProjectRequest;
 
 class ProjectController extends Controller
 {
@@ -33,6 +34,7 @@ class ProjectController extends Controller
     public function create()
     {
         //
+        return  view('projects.create');
     }
 
     /**
@@ -41,9 +43,22 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateProjectRequest $request)
     {
         //
+        $cadena = request('title');
+
+        $cadenaConvert = strtr($cadena, " ", "-");
+
+
+        Project:: create([
+            'title' => request('title'),
+            'url' => $cadenaConvert,
+            'description' => request('description')
+        ]);
+
+        return redirect()->route('projects.index');
+
     }
 
     /**
