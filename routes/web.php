@@ -33,9 +33,15 @@ Route::get('/', function () {
 
 Route::view('/','home')->name('home');
 Route::view('/quienes-somos', 'about')->name('about');
+
 //Route::view('/portfolio', 'portfolio',compact('portfolio'))->name('portfolio');
 Route::get('/portafolio', 'ProjectController@index')->name('projects.index');
 Route::get('/portafolio/crear', 'ProjectController@create')->name('projects.create');
+Route::get('/portafolio/{project}/editar', 'ProjectController@edit')->name('projects.edit');
+
+//Actualizar datos se usa patch
+Route::patch('/portafolio/{project}', 'ProjectController@update')->name('projects.update');
+
 Route::post('/portafolio', 'ProjectController@store')->name('projects.store');
 Route::get('/portafolio/{project}', 'ProjectController@show')->name('projects.show');
 //Route::view('/contact', 'contact')->name('contact');

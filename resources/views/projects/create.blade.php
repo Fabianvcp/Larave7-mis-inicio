@@ -5,31 +5,12 @@
 
     <h1>Formulario de creación de projecto</h1>
 
-    @if ($errors->any())
-        <ul>
-            @foreach($errors->all() as $error)
-
-                <li>{{ $error }}</li>
-
-             @endforeach
-        </ul>
-    @else
-
-    @endif
+    @include('partials.validation-errors')
 
     <form action="{{  route('projects.store')  }}" method="post">
-        @csrf
-        <label for="">
-            Titulo del proyecto <br>
-            <input type="text" name="title">
-        </label>
-        <br>
-        <label for="">
-            Descripción del proyecto <br>
-            <textarea name="description"></textarea>
-        </label>
-        <br>
-        <button>{{ __('send') }}</button>
+
+        @include('projects._form', ['btnText' =>'Guardar'])
+
     </form>
 
 

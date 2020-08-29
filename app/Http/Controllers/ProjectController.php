@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Project;
 use Illuminate\Http\Request;
-use App\Http\Requests\CreateProjectRequest;
+use App\Http\Requests\SaveProjectRequest;
 
 class ProjectController extends Controller
 {
@@ -34,7 +34,9 @@ class ProjectController extends Controller
     public function create()
     {
         //
-        return  view('projects.create');
+        return  view('projects.create',[
+            'project' => new Project
+        ]);
     }
 
     /**
@@ -43,7 +45,7 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateProjectRequest $request)
+    public function store(SaveProjectRequest $request)
     {
         //
         $cadena = request('title');
@@ -83,21 +85,35 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Project $project)
     {
         //
+        return view('projects.edit',[
+            'project' => $project
+        ]);
+
     }
 
     /**
      * actualiza el elemento especifico editado
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Project $project
+     * @return Project
      */
-    public function update(Request $request, $id)
+    public function update(SaveProjectRequest $project)
     {
         //
+        $cadena = request('title');
+
+        $cadenaConvert = strtr($cadena, " ", "-");
+
+        $project->update([
+            'title' => request('title'),
+            'url' => $cadenaConvert,
+            'description' => request('description')
+        ]);
+
+        return redirect()->route('projects.show',$project);
     }
 
     /**

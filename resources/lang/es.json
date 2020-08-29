@@ -56,5 +56,6 @@
   "update":"actualizar",
   "store" :"almacenar",
   "destroy":"Eliminar",
-  "send": "enviar"
+  "send": "enviar",
+  "save": "guardar"
 }
