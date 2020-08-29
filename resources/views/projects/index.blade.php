@@ -6,8 +6,9 @@
     <h1>Projectos</h1>
     Bienvenido {{ $nombre ?? "Invitado" }}
     <br>
-    <a href="{{ route('projects.create') }}">Crear proyecto</a>
-
+    @auth
+        <a href="{{ route('projects.create') }}">Crear proyecto</a>
+    @endauth
     <ul>
 
         {{--     @isset($portfolio)

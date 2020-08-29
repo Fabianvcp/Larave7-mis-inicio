@@ -35,6 +35,7 @@ Route::view('/','home')->name('home');
 Route::view('/quienes-somos', 'about')->name('about');
 
 //Route::view('/portfolio', 'portfolio',compact('portfolio'))->name('portfolio');
+
 Route::get('/portafolio', 'ProjectController@index')->name('projects.index');
 Route::get('/portafolio/crear', 'ProjectController@create')->name('projects.create');
 Route::get('/portafolio/{project}/editar', 'ProjectController@edit')->name('projects.edit');
@@ -48,6 +49,14 @@ Route::get('/portafolio/{project}', 'ProjectController@show')->name('projects.sh
 
 Route::delete('/portafolio/{project}', 'ProjectController@destroy')->name('projects.destroy');
 
+//                                   es lo mismo que lo de abajo
+//Route::resource('portafolio', 'ProjectController')
+//    ->parameters(['portafolio' => 'project'])
+//    ->names('projects');
 
 Route::get('/contacto', 'MessagesController@index' )->name('contact');
 Route::post('/contacto', 'MessagesController@store' )->name('messages.store');
+
+Auth::routes();
+
+//Route::get('/home', 'HomeController@index')->name('home');

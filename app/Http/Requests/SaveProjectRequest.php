@@ -4,6 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @method update(array $array)
+ */
 class SaveProjectRequest extends FormRequest
 {
     /**
@@ -29,4 +32,5 @@ class SaveProjectRequest extends FormRequest
             'description' => 'required|min:3'
         ];
     }
+
 }

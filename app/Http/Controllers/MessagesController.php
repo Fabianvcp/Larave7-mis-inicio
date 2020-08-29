@@ -47,7 +47,7 @@ class MessagesController extends Controller
         //to para send contenido
         Mail::to('gallardofabianvcpz@gmail.com')->queue( new MessageReceived($msg));
 
-        return  'Datos validados';
+        back()->with('status', 'Recibimos tu mensajes, te responderemos en menos 24 horas');
     }
 
     /**

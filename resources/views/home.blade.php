@@ -3,7 +3,9 @@
 
 @section('content')
 
-    <h1>Home</h1>
-    Bienvenido {{ $nombre ?? "Invitado" }}
+    <h1>{{ __('Home')}}</h1>
+    @auth
+        {{ auth()->user()->name }}
+    @endauth
 
 @endsection

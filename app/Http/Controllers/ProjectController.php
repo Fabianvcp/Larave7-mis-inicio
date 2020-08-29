@@ -14,6 +14,15 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        //$this->middleware('auth')->only('create','edit');
+        //except proteguetodo menos lo que marques dentro de lo parentecis
+        $this->middleware('auth')->except('index','show');
+    }
+
+
     public function index()
     {
         //$projects = DB::table('projects')->get(); orm comun
@@ -42,10 +51,10 @@ class ProjectController extends Controller
     /**
      * Almacena los datos ingresados en create
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param SaveProjectRequest $project
      * @return \Illuminate\Http\Response
      */
-    public function store(SaveProjectRequest $request)
+    public function store(SaveProjectRequest $project)
     {
         //
         $cadena = request('title');
@@ -59,14 +68,14 @@ class ProjectController extends Controller
             'description' => request('description')
         ]);
 
-        return redirect()->route('projects.index');
+        return redirect()->route('projects.index')->with('status', 'El proyecto fue creado con éxito');
 
     }
 
     /**
      * muestra un recurso especifico.
      *
-     * @param  int  $id
+     * @param Project $project
      * @return \Illuminate\Http\Response
      */
     public function show(Project $project)
@@ -82,7 +91,7 @@ class ProjectController extends Controller
     /**
      * edita un elemento especifico
      *
-     * @param  int  $id
+     * @param Project $project
      * @return \Illuminate\Http\Response
      */
     public function edit(Project $project)
@@ -95,12 +104,12 @@ class ProjectController extends Controller
     }
 
     /**
-     * actualiza el elemento especifico editado
+     * Almacena los datos ingresados en create
      *
-     * @param Project $project
-     * @return Project
+     * @param SaveProjectRequest $project
+     * @return \Illuminate\Http\Response
      */
-    public function update(SaveProjectRequest $project)
+    public function update(Project $project)
     {
         //
         $cadena = request('title');
@@ -113,20 +122,21 @@ class ProjectController extends Controller
             'description' => request('description')
         ]);
 
-        return redirect()->route('projects.show',$project);
+        return redirect()->route('projects.show',$project)->with('status', 'El proyecto fue actualizado con éxito');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Project $project
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(Project $project)
     {
 
         $project->delete();
 
-        return redirect()->route('projects.index');
+        return redirect()->route('projects.index')->with('status', 'El proyecto fue Eliminado con éxito');
     }
 }
