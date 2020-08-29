@@ -46,5 +46,8 @@ Route::post('/portafolio', 'ProjectController@store')->name('projects.store');
 Route::get('/portafolio/{project}', 'ProjectController@show')->name('projects.show');
 //Route::view('/contact', 'contact')->name('contact');
 
+Route::delete('/portafolio/{project}', 'ProjectController@destroy')->name('projects.destroy');
+
+
 Route::get('/contacto', 'MessagesController@index' )->name('contact');
 Route::post('/contacto', 'MessagesController@store' )->name('messages.store');
