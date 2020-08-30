@@ -3,7 +3,7 @@
 
 @section('content')
 
-    <h1>About</h1>
+    <h1>{{ __('About')}}</h1>
     Bienvenido {{ $nombre ?? "Invitado" }}
 
 @endsection

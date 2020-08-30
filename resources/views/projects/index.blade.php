@@ -2,34 +2,48 @@
 @extends('layout')
 
 @section('content')
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h1 class="display-4 mb-0" >Portafolio</h1>
 
-    <h1>Projectos</h1>
-    Bienvenido {{ $nombre ?? "Invitado" }}
-    <br>
-    @auth
-        <a href="{{ route('projects.create') }}">Crear proyecto</a>
-    @endauth
-    <ul>
+            <br>
+            @auth
+                <a class="btn btn-primary" href="{{ route('projects.create') }}">Crear proyecto</a>
+            @endauth
+        </div>
+        <p class="lead text-secondary">Lorem ipsum dolor sit amet, consecteturs</p>
 
-        {{--     @isset($portfolio)
-                 @else
-             @endisset se usa para decir si existe la variable--}}
+            <ul class="list-group">
 
-        @forelse($projects as $project)
+                {{--     @isset($portfolio)
+                         @else
+                     @endisset se usa para decir si existe la variable--}}
 
-            <li><a href="{{ route('projects.show', $project) }}"><strong>{{ $project->title}}</strong></a> <br>
-                {{--                    <small>{{ $project->description }}</small> <br>    --}}
-                {{--                    {{ $project->created_at->format('d-m-Y') }} <br>   --}}
-            </li>
-            {{--  tiempo en humano     {{ $project->created_at->diffForHumans() }}  --}}
-        @empty
+                @forelse($projects as $project)
 
-            <li>No hay proyectos para mostrar</li>
+                    <li class="list-group-item border-0 mb-3 shadow-sm">
+                        <a class="text-secondary d-flex justify-content-between align-items-center" href="{{ route('projects.show', $project) }}">
+                            <span class="font-weight-bold">
+                                {{ $project->title}}
+                            </span>
+                            <span class="text-black-50">
+                                {{ $project->created_at->format('d/m/Y') }}
+                            </span>
 
-        @endforelse
+                        </a>
+                        {{--                    <small>{{ $project->description }}</small> <br>    --}}
+                        {{--                     <br>   --}}
+                    </li>
+                    {{--  tiempo en humano     {{ $project->created_at->diffForHumans() }}  --}}
+                @empty
 
-        {{ $projects->links() }}
+                    <li class="list-group-item border-0 mb-3 shadow-sm">No hay proyectos para mostrar</li>
 
-    </ul>
+                @endforelse
+
+                {{ $projects->links() }}
+
+            </ul>
+    </div>
 
 @endsection
